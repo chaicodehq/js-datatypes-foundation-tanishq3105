@@ -37,7 +37,8 @@
  *      - .charAt(0) se pehla character aur .at(-1) se aakhri character nikalo
  *      - Pehle .trim() karo
  *      - Return: { first, last }
- *      - Agar order string nahi hai ya trim ke baad empty hai, return null
+ *      - Agar order string nahi hai ya trim
+ *  ke baad empty hai, return null
  *      - Example: getFirstAndLastChar("masala chai") => { first: "m", last: "i" }
  *
  * @example
@@ -47,20 +48,42 @@
  */
 export function getChaiOrderLength(order) {
   // Your code here
+  if (typeof order !== "string" || order === "") return -1;
+  return order.trim().length;
 }
 
 export function shoutChaiOrder(order) {
   // Your code here
+
+  if (typeof order !== "string" || order.trim() === "") return "";
+  order = order.trim();
+  return order.toUpperCase();
 }
 
 export function whisperChaiOrder(order) {
   // Your code here
+
+  if (typeof order !== "string" || order.trim() === "") return "";
+  order = order.trim();
+  return order.toLowerCase();
 }
 
 export function hasSpecialIngredient(order, ingredient) {
   // Your code here
+  if (typeof order !== "string" || typeof ingredient !== "string") return false;
+  order = order.trim();
+  order = order.toLowerCase();
+  ingredient = ingredient.toLowerCase();
+  return order.includes(ingredient);
 }
 
 export function getFirstAndLastChar(order) {
   // Your code here
+
+  if (typeof order !== "string" || order.trim() === "") return null;
+  order = order.trim();
+  return {
+    first: order.charAt(0),
+    last: order.at(-1),
+  };
 }

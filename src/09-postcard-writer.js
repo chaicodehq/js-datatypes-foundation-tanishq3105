@@ -35,7 +35,7 @@
  *      - Example: formatPostcardField("To", "Dadi ji", 8) => "To      : Dadi ji"
  *
  *   4. isFromState(address, stateCode)
- *      - .endsWith() se check karo ki address kisi state code se end hota hai
+ *      - .endsWith() se check karo ki address kisi state code se end hota hai0
  *      - Agar address ya stateCode string nahi hai, return false
  *      - Example: isFromState("Guddu, Lucknow, UP", "UP") => true
  *      - Example: isFromState("Priya, Mumbai, MH", "UP") => false
@@ -53,20 +53,41 @@
  */
 export function writePostcard(sender, receiver, message) {
   // Your code here
+  if (
+    typeof sender !== "string" ||
+    typeof receiver !== "string" ||
+    typeof message !== "string"
+  )
+    return "";
+  if (sender.trim() == "" || receiver.trim() == "" || message.trim() == "")
+    return "";
+  return `Priy ${receiver},\n\n${message}\n\nAapka/Aapki,\n${sender}`;
 }
 
 export function isValidPincode(code) {
   // Your code here
+  if (typeof code !== "string") return false;
+  if (code.startsWith("0") || code.trim().length !== 6 || !/^\d+$/.test(code))
+    return false;
+  return true;
 }
 
-export function formatPostcardField(label, value, width) {
+export function formatPostcardField(label, value, width = 12) {
   // Your code here
+  if (typeof label !== "string" || typeof value !== "string") return "";
+  return `${label.padEnd(width)}: ${value}`;
 }
 
 export function isFromState(address, stateCode) {
   // Your code here
+  if (typeof address !== "string" || typeof stateCode !== "string")
+    return false;
+  return address.endsWith(stateCode);
 }
 
 export function countVowels(message) {
   // Your code here
+  if (typeof message !== "string") return 0;
+  const matchedString = message.match(/[aeiouAEIOU]/g);
+  return matchedString === null ? 0 : matchedString.length;
 }
